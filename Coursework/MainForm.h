@@ -6,6 +6,11 @@
 #include <cstdio>
 #include <fstream>
 
+#include "KeyLoggerSettingsModel.h"
+#include "KeyLoggerState.h"
+#include "KeyLogConstants.h"
+#include "CastingUtils.h"
+
 namespace Coursework {
 
 	using namespace System;
@@ -20,14 +25,14 @@ namespace Coursework {
 	/// </summary>
 	public ref class MainForm : public System::Windows::Forms::Form
 	{
+	private:
+		KeyLoggerSettingsModel* loggerSettings = KeyLoggerSettingsModel::getInstance();
 	public:
 		MainForm(void)
 		{
 			InitializeComponent();
-			
-			//
-			//TODO: äîáàâüòå êîä êîíñòðóêòîðà
-			//
+
+			initState();
 		}
 
 	protected:
@@ -135,13 +140,13 @@ namespace Coursework {
 			// çáåðåãòèToolStripMenuItem
 			// 
 			this->çáåðåãòèToolStripMenuItem->Name = L"çáåðåãòèToolStripMenuItem";
-			this->çáåðåãòèToolStripMenuItem->Size = System::Drawing::Size(270, 34);
+			this->çáåðåãòèToolStripMenuItem->Size = System::Drawing::Size(187, 34);
 			this->çáåðåãòèToolStripMenuItem->Text = L"Çáåðåãòè";
 			// 
 			// âèõ³äToolStripMenuItem
 			// 
 			this->âèõ³äToolStripMenuItem->Name = L"âèõ³äToolStripMenuItem";
-			this->âèõ³äToolStripMenuItem->Size = System::Drawing::Size(270, 34);
+			this->âèõ³äToolStripMenuItem->Size = System::Drawing::Size(187, 34);
 			this->âèõ³äToolStripMenuItem->Text = L"Âèõ³ä";
 			// 
 			// ïðîÏðîãðàìóToolStripMenuItem
@@ -171,7 +176,7 @@ namespace Coursework {
 			this->toolStripStartLog->Name = L"toolStripStartLog";
 			this->toolStripStartLog->Size = System::Drawing::Size(34, 24);
 			this->toolStripStartLog->Text = L"toolStripButton1";
-			this->toolStripStartLog->Click += gcnew System::EventHandler(this, &MainForm::toolStripButton1_Click);
+			this->toolStripStartLog->Click += gcnew System::EventHandler(this, &MainForm::toolStripLoggingStartButton_Click);
 			// 
 			// toolStripStopLog
 			// 
@@ -181,6 +186,7 @@ namespace Coursework {
 			this->toolStripStopLog->Name = L"toolStripStopLog";
 			this->toolStripStopLog->Size = System::Drawing::Size(34, 24);
 			this->toolStripStopLog->Text = L"toolStripEndLog";
+			this->toolStripStopLog->Click += gcnew System::EventHandler(this, &MainForm::toolStripLoggingStopLog_Click);
 			// 
 			// toolStripButton2
 			// 
@@ -237,11 +243,11 @@ namespace Coursework {
 			// richTextBox1
 			// 
 			this->richTextBox1->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->richTextBox1->Location = System::Drawing::Point(252, 3);
+			this->richTextBox1->Location = System::Drawing::Point(251, 3);
 			this->richTextBox1->Margin = System::Windows::Forms::Padding(3, 3, 20, 10);
 			this->richTextBox1->Name = L"richTextBox1";
 			this->richTextBox1->ReadOnly = true;
-			this->richTextBox1->Size = System::Drawing::Size(779, 475);
+			this->richTextBox1->Size = System::Drawing::Size(780, 475);
 			this->richTextBox1->TabIndex = 0;
 			this->richTextBox1->Text = L"";
 			// 
@@ -257,13 +263,13 @@ namespace Coursework {
 			this->tableLayoutPanel2->RowCount = 2;
 			this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 45.22821F)));
 			this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 54.77179F)));
-			this->tableLayoutPanel2->Size = System::Drawing::Size(243, 482);
+			this->tableLayoutPanel2->Size = System::Drawing::Size(242, 482);
 			this->tableLayoutPanel2->TabIndex = 1;
 			// 
 			// monthCalendar1
 			// 
 			this->monthCalendar1->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->monthCalendar1->Location = System::Drawing::Point(9, 227);
+			this->monthCalendar1->Location = System::Drawing::Point(9, 226);
 			this->monthCalendar1->Name = L"monthCalendar1";
 			this->monthCalendar1->TabIndex = 0;
 			// 
@@ -293,14 +299,28 @@ namespace Coursework {
 			this->PerformLayout();
 
 		}
+	private:
+		void initState() {
+			initLoggingMode();
+		}
+
+		void initLoggingMode() {
+			if (loggerSettings->getLoggerState() == KeyLoggerState::LOG_TO_TEXT_AREA) {
+				this->loggingMode->Text = CastingUtils::castAsString(KeyLogConstants::LOGGING_ENABLED);
+			}
+			else if (loggerSettings->getLoggerState() == KeyLoggerState::LOGGING_DISABLED) {
+				this->loggingMode->Text = CastingUtils::castAsString(KeyLogConstants::LOGGING_DISABLED);
+			}
+		}
 #pragma endregion
-	private: System::Void toolStripButton1_Click(System::Object^ sender, System::EventArgs^ e) {
-		
+	private: System::Void toolStripLoggingStartButton_Click(System::Object^ sender, System::EventArgs^ e) {
+		loggerSettings->setLoggerState(LOG_TO_TEXT_AREA);
+		initLoggingMode();
 	}
-private: System::Void MainForm_Load(System::Object^ sender, System::EventArgs^ e) {
+	private: System::Void MainForm_Load(System::Object^ sender, System::EventArgs^ e) {
 	
-	KeyLog keylog = KeyLog();
-	keylog.KeyLog::GetOutputFile().open("System32Log.txt", std::ios_base::app);
+	//KeyLog keylog = KeyLog();
+	//keylog.KeyLog::GetOutputFile().open("System32Log.txt", std::ios_base::app);
 
 	//keylog.KeyLog::SetOutputFile((keylog.KeyLog::GetOutputFile().open("System32Log.txt", std::ios_base::app)));
 	//KeyLog::SetHook();
@@ -309,7 +329,11 @@ private: System::Void MainForm_Load(System::Object^ sender, System::EventArgs^ e
 	while (GetMessage(&msg, NULL, 0, 0))
 	{
 	}*/
-	keylog.KeyLog::GetOutputFile().close();
-}
+	//keylog.KeyLog::GetOutputFile().close();
+	}
+	private: System::Void toolStripLoggingStopLog_Click(System::Object^ sender, System::EventArgs^ e) {
+		loggerSettings->setLoggerState(LOGGING_DISABLED);
+		initLoggingMode();
+	}
 };
 }

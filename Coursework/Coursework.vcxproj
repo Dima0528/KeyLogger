@@ -121,13 +121,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CastingUtils.cpp" />
     <ClCompile Include="FileWriter.cpp" />
     <ClCompile Include="KeyLog.cpp" />
+    <ClCompile Include="KeyLogConstants.cpp" />
+    <ClCompile Include="KeyLoggerSettingsModel.cpp" />
+    <ClCompile Include="KeyLoggerState.cpp" />
     <ClCompile Include="MainForm.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CastingUtils.h" />
     <ClInclude Include="FileWriter.h" />
     <ClInclude Include="KeyLog.h" />
+    <ClInclude Include="KeyLogConstants.h" />
+    <ClInclude Include="KeyLoggerSettingsModel.h" />
+    <ClInclude Include="KeyLoggerState.h" />
     <ClInclude Include="MainForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
