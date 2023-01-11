@@ -121,10 +121,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="FileWriter.cpp" />
     <ClCompile Include="KeyLog.cpp" />
     <ClCompile Include="MainForm.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="FileWriter.h" />
     <ClInclude Include="KeyLog.h" />
     <ClInclude Include="MainForm.h">
       <FileType>CppForm</FileType>

