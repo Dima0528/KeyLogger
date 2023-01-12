@@ -1,5 +1,4 @@
 #pragma once
-#include "KeyLog.h"
 #include <Windows.h>
 #include <time.h>
 #include <iostream>
@@ -10,6 +9,7 @@
 #include "KeyLoggerState.h"
 #include "KeyLogConstants.h"
 #include "CastingUtils.h"
+#include "KeyLoggerModule.h"
 
 namespace Coursework {
 
@@ -33,6 +33,8 @@ namespace Coursework {
 			InitializeComponent();
 
 			initState();
+
+			SetHook();
 		}
 
 	protected:
@@ -123,7 +125,7 @@ namespace Coursework {
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
 			this->menuStrip1->Padding = System::Windows::Forms::Padding(7, 2, 0, 2);
-			this->menuStrip1->Size = System::Drawing::Size(1051, 36);
+			this->menuStrip1->Size = System::Drawing::Size(1051, 33);
 			this->menuStrip1->TabIndex = 0;
 			this->menuStrip1->Text = L"menuStrip1";
 			// 
@@ -134,7 +136,7 @@ namespace Coursework {
 					this->âèõ³äToolStripMenuItem
 			});
 			this->ôàéëToolStripMenuItem->Name = L"ôàéëToolStripMenuItem";
-			this->ôàéëToolStripMenuItem->Size = System::Drawing::Size(69, 32);
+			this->ôàéëToolStripMenuItem->Size = System::Drawing::Size(69, 29);
 			this->ôàéëToolStripMenuItem->Text = L"Ôàéë";
 			// 
 			// çáåðåãòèToolStripMenuItem
@@ -152,7 +154,7 @@ namespace Coursework {
 			// ïðîÏðîãðàìóToolStripMenuItem
 			// 
 			this->ïðîÏðîãðàìóToolStripMenuItem->Name = L"ïðîÏðîãðàìóToolStripMenuItem";
-			this->ïðîÏðîãðàìóToolStripMenuItem->Size = System::Drawing::Size(149, 32);
+			this->ïðîÏðîãðàìóToolStripMenuItem->Size = System::Drawing::Size(149, 29);
 			this->ïðîÏðîãðàìóToolStripMenuItem->Text = L"Ïðî ïðîãðàìó";
 			// 
 			// toolStrip1
@@ -162,9 +164,9 @@ namespace Coursework {
 				this->toolStripStartLog,
 					this->toolStripStopLog, this->toolStripButton2, this->toolStripButton3
 			});
-			this->toolStrip1->Location = System::Drawing::Point(0, 36);
+			this->toolStrip1->Location = System::Drawing::Point(0, 33);
 			this->toolStrip1->Name = L"toolStrip1";
-			this->toolStrip1->Size = System::Drawing::Size(1051, 38);
+			this->toolStrip1->Size = System::Drawing::Size(1051, 29);
 			this->toolStrip1->TabIndex = 1;
 			this->toolStrip1->Text = L"toolStrip1";
 			// 
@@ -174,7 +176,7 @@ namespace Coursework {
 			this->toolStripStartLog->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"toolStripStartLog.Image")));
 			this->toolStripStartLog->ImageTransparentColor = System::Drawing::Color::Magenta;
 			this->toolStripStartLog->Name = L"toolStripStartLog";
-			this->toolStripStartLog->Size = System::Drawing::Size(34, 33);
+			this->toolStripStartLog->Size = System::Drawing::Size(34, 24);
 			this->toolStripStartLog->Text = L"Óâ³ìêíóòè ëîãóâàííÿ";
 			this->toolStripStartLog->Click += gcnew System::EventHandler(this, &MainForm::toolStripLoggingStartButton_Click);
 			// 
@@ -184,7 +186,7 @@ namespace Coursework {
 			this->toolStripStopLog->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"toolStripStopLog.Image")));
 			this->toolStripStopLog->ImageTransparentColor = System::Drawing::Color::Magenta;
 			this->toolStripStopLog->Name = L"toolStripStopLog";
-			this->toolStripStopLog->Size = System::Drawing::Size(34, 33);
+			this->toolStripStopLog->Size = System::Drawing::Size(34, 24);
 			this->toolStripStopLog->Text = L"Âèìêíóòè ëîãóâàííÿ";
 			this->toolStripStopLog->Click += gcnew System::EventHandler(this, &MainForm::toolStripLoggingStopLog_Click);
 			// 
@@ -194,7 +196,7 @@ namespace Coursework {
 			this->toolStripButton2->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"toolStripButton2.Image")));
 			this->toolStripButton2->ImageTransparentColor = System::Drawing::Color::Magenta;
 			this->toolStripButton2->Name = L"toolStripButton2";
-			this->toolStripButton2->Size = System::Drawing::Size(34, 33);
+			this->toolStripButton2->Size = System::Drawing::Size(34, 24);
 			this->toolStripButton2->Text = L"toolStripLogView";
 			// 
 			// toolStripButton3
@@ -203,7 +205,7 @@ namespace Coursework {
 			this->toolStripButton3->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"toolStripButton3.Image")));
 			this->toolStripButton3->ImageTransparentColor = System::Drawing::Color::Magenta;
 			this->toolStripButton3->Name = L"toolStripButton3";
-			this->toolStripButton3->Size = System::Drawing::Size(34, 33);
+			this->toolStripButton3->Size = System::Drawing::Size(34, 24);
 			this->toolStripButton3->Text = L"toolStripRefresh";
 			// 
 			// statusStrip1
@@ -233,11 +235,11 @@ namespace Coursework {
 			this->tableLayoutPanel1->Controls->Add(this->richTextBox1, 1, 0);
 			this->tableLayoutPanel1->Controls->Add(this->tableLayoutPanel2, 0, 0);
 			this->tableLayoutPanel1->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->tableLayoutPanel1->Location = System::Drawing::Point(0, 74);
+			this->tableLayoutPanel1->Location = System::Drawing::Point(0, 62);
 			this->tableLayoutPanel1->Name = L"tableLayoutPanel1";
 			this->tableLayoutPanel1->RowCount = 1;
 			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 50)));
-			this->tableLayoutPanel1->Size = System::Drawing::Size(1051, 476);
+			this->tableLayoutPanel1->Size = System::Drawing::Size(1051, 488);
 			this->tableLayoutPanel1->TabIndex = 3;
 			// 
 			// richTextBox1
@@ -247,7 +249,7 @@ namespace Coursework {
 			this->richTextBox1->Margin = System::Windows::Forms::Padding(3, 3, 20, 10);
 			this->richTextBox1->Name = L"richTextBox1";
 			this->richTextBox1->ReadOnly = true;
-			this->richTextBox1->Size = System::Drawing::Size(780, 463);
+			this->richTextBox1->Size = System::Drawing::Size(780, 475);
 			this->richTextBox1->TabIndex = 0;
 			this->richTextBox1->Text = L"";
 			// 
@@ -263,13 +265,13 @@ namespace Coursework {
 			this->tableLayoutPanel2->RowCount = 2;
 			this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 45.22821F)));
 			this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 54.77179F)));
-			this->tableLayoutPanel2->Size = System::Drawing::Size(242, 470);
+			this->tableLayoutPanel2->Size = System::Drawing::Size(242, 482);
 			this->tableLayoutPanel2->TabIndex = 1;
 			// 
 			// monthCalendar1
 			// 
 			this->monthCalendar1->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->monthCalendar1->Location = System::Drawing::Point(9, 221);
+			this->monthCalendar1->Location = System::Drawing::Point(9, 226);
 			this->monthCalendar1->Name = L"monthCalendar1";
 			this->monthCalendar1->TabIndex = 0;
 			// 
