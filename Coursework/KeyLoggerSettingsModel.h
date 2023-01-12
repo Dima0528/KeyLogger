@@ -9,7 +9,7 @@ private:
 private:
 	KeyLoggerState loggerState;
 private:
-	KeyLoggerSettingsModel() {};
+	KeyLoggerSettingsModel() : loggerState(KeyLoggerState::LOGGING_DISABLED) {};
 public:
 	KeyLoggerState getLoggerState() {
 		return loggerState;

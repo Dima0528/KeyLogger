@@ -16,7 +16,7 @@ using namespace System::Windows::Forms;
 //#ifdef invisible
 //	ShowWindow(FindWindowA("ConsoleWindowClass", NULL), 0); // invisible window
 //#endif // invisible
-//}
+//} 
 
 [STAThread]
 void main() {
@@ -24,8 +24,6 @@ void main() {
 	Application::EnableVisualStyles();
 	Application::SetCompatibleTextRenderingDefault(false);
 	Coursework::MainForm form;
-
-
 	Application::Run(% form);
 }
 

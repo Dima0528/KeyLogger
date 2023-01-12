@@ -10,6 +10,7 @@
 #include "KeyLogConstants.h"
 #include "CastingUtils.h"
 #include "KeyLoggerModule.h"
+#include "KeyLoggedAreaHolder.h"
 
 namespace Coursework {
 
@@ -34,6 +35,7 @@ namespace Coursework {
 
 			initState();
 
+			KeyLoggedAreaHolder::setLoggedArea(this->keyLoggedArea);
 			SetHook();
 		}
 
@@ -71,7 +73,8 @@ namespace Coursework {
 
 
 	private: System::Windows::Forms::TableLayoutPanel^ tableLayoutPanel1;
-	private: System::Windows::Forms::RichTextBox^ richTextBox1;
+	private: System::Windows::Forms::RichTextBox^ keyLoggedArea;
+
 	private: System::Windows::Forms::TableLayoutPanel^ tableLayoutPanel2;
 	private: System::Windows::Forms::MonthCalendar^ monthCalendar1;
 
@@ -104,7 +107,7 @@ namespace Coursework {
 			this->statusStrip1 = (gcnew System::Windows::Forms::StatusStrip());
 			this->loggingMode = (gcnew System::Windows::Forms::ToolStripStatusLabel());
 			this->tableLayoutPanel1 = (gcnew System::Windows::Forms::TableLayoutPanel());
-			this->richTextBox1 = (gcnew System::Windows::Forms::RichTextBox());
+			this->keyLoggedArea = (gcnew System::Windows::Forms::RichTextBox());
 			this->tableLayoutPanel2 = (gcnew System::Windows::Forms::TableLayoutPanel());
 			this->monthCalendar1 = (gcnew System::Windows::Forms::MonthCalendar());
 			this->menuStrip1->SuspendLayout();
@@ -232,7 +235,7 @@ namespace Coursework {
 				23.69172F)));
 			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
 				76.30828F)));
-			this->tableLayoutPanel1->Controls->Add(this->richTextBox1, 1, 0);
+			this->tableLayoutPanel1->Controls->Add(this->keyLoggedArea, 1, 0);
 			this->tableLayoutPanel1->Controls->Add(this->tableLayoutPanel2, 0, 0);
 			this->tableLayoutPanel1->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->tableLayoutPanel1->Location = System::Drawing::Point(0, 62);
@@ -242,16 +245,16 @@ namespace Coursework {
 			this->tableLayoutPanel1->Size = System::Drawing::Size(1051, 488);
 			this->tableLayoutPanel1->TabIndex = 3;
 			// 
-			// richTextBox1
+			// keyLoggedArea
 			// 
-			this->richTextBox1->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->richTextBox1->Location = System::Drawing::Point(251, 3);
-			this->richTextBox1->Margin = System::Windows::Forms::Padding(3, 3, 20, 10);
-			this->richTextBox1->Name = L"richTextBox1";
-			this->richTextBox1->ReadOnly = true;
-			this->richTextBox1->Size = System::Drawing::Size(780, 475);
-			this->richTextBox1->TabIndex = 0;
-			this->richTextBox1->Text = L"";
+			this->keyLoggedArea->Dock = System::Windows::Forms::DockStyle::Fill;
+			this->keyLoggedArea->Location = System::Drawing::Point(251, 3);
+			this->keyLoggedArea->Margin = System::Windows::Forms::Padding(3, 3, 20, 10);
+			this->keyLoggedArea->Name = L"keyLoggedArea";
+			this->keyLoggedArea->ReadOnly = true;
+			this->keyLoggedArea->Size = System::Drawing::Size(780, 475);
+			this->keyLoggedArea->TabIndex = 0;
+			this->keyLoggedArea->Text = L"";
 			// 
 			// tableLayoutPanel2
 			// 

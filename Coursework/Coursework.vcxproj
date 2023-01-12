@@ -124,6 +124,8 @@
     <ClCompile Include="CastingUtils.cpp" />
     <ClCompile Include="FileWriter.cpp" />
     <ClCompile Include="KeyLogConstants.cpp" />
+    <ClCompile Include="KeyLoggedAreaHolder.cpp" />
+    <ClCompile Include="KeyLogger.cpp" />
     <ClCompile Include="KeyLoggerModule.cpp" />
     <ClCompile Include="KeyLoggerSettingsModel.cpp" />
     <ClCompile Include="KeyLoggerState.cpp" />
@@ -133,6 +135,8 @@
     <ClInclude Include="CastingUtils.h" />
     <ClInclude Include="FileWriter.h" />
     <ClInclude Include="KeyLogConstants.h" />
+    <ClInclude Include="KeyLoggedAreaHolder.h" />
+    <ClInclude Include="KeyLogger.h" />
     <ClInclude Include="KeyLoggerModule.h" />
     <ClInclude Include="KeyLoggerSettingsModel.h" />
     <ClInclude Include="KeyLoggerState.h" />
