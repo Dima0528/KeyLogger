@@ -11,6 +11,8 @@
 #include "CastingUtils.h"
 #include "KeyLoggerModule.h"
 #include "KeyLoggedAreaHolder.h"
+#include "FileWriter.h"
+#include "FileReader.h"
 
 namespace Coursework {
 
@@ -130,7 +132,7 @@ namespace Coursework {
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
 			this->menuStrip1->Padding = System::Windows::Forms::Padding(7, 2, 0, 2);
-			this->menuStrip1->Size = System::Drawing::Size(1051, 36);
+			this->menuStrip1->Size = System::Drawing::Size(1051, 33);
 			this->menuStrip1->TabIndex = 0;
 			this->menuStrip1->Text = L"menuStrip1";
 			// 
@@ -141,7 +143,7 @@ namespace Coursework {
 					this->вихідToolStripMenuItem
 			});
 			this->файлToolStripMenuItem->Name = L"файлToolStripMenuItem";
-			this->файлToolStripMenuItem->Size = System::Drawing::Size(69, 32);
+			this->файлToolStripMenuItem->Size = System::Drawing::Size(69, 29);
 			this->файлToolStripMenuItem->Text = L"Файл";
 			// 
 			// зберегтиToolStripMenuItem
@@ -159,7 +161,7 @@ namespace Coursework {
 			// проПрограмуToolStripMenuItem
 			// 
 			this->проПрограмуToolStripMenuItem->Name = L"проПрограмуToolStripMenuItem";
-			this->проПрограмуToolStripMenuItem->Size = System::Drawing::Size(149, 32);
+			this->проПрограмуToolStripMenuItem->Size = System::Drawing::Size(149, 29);
 			this->проПрограмуToolStripMenuItem->Text = L"Про програму";
 			// 
 			// toolStrip1
@@ -169,9 +171,9 @@ namespace Coursework {
 				this->toolStripStartLog,
 					this->toolStripStopLog, this->toolStripImportLog, this->toolStripExportLog
 			});
-			this->toolStrip1->Location = System::Drawing::Point(0, 36);
+			this->toolStrip1->Location = System::Drawing::Point(0, 33);
 			this->toolStrip1->Name = L"toolStrip1";
-			this->toolStrip1->Size = System::Drawing::Size(1051, 38);
+			this->toolStrip1->Size = System::Drawing::Size(1051, 29);
 			this->toolStrip1->TabIndex = 1;
 			this->toolStrip1->Text = L"toolStrip1";
 			// 
@@ -181,7 +183,7 @@ namespace Coursework {
 			this->toolStripStartLog->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"toolStripStartLog.Image")));
 			this->toolStripStartLog->ImageTransparentColor = System::Drawing::Color::Magenta;
 			this->toolStripStartLog->Name = L"toolStripStartLog";
-			this->toolStripStartLog->Size = System::Drawing::Size(34, 33);
+			this->toolStripStartLog->Size = System::Drawing::Size(34, 24);
 			this->toolStripStartLog->Text = L"Увімкнути логування";
 			this->toolStripStartLog->Click += gcnew System::EventHandler(this, &MainForm::toolStripLoggingStartButton_Click);
 			// 
@@ -191,7 +193,7 @@ namespace Coursework {
 			this->toolStripStopLog->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"toolStripStopLog.Image")));
 			this->toolStripStopLog->ImageTransparentColor = System::Drawing::Color::Magenta;
 			this->toolStripStopLog->Name = L"toolStripStopLog";
-			this->toolStripStopLog->Size = System::Drawing::Size(34, 33);
+			this->toolStripStopLog->Size = System::Drawing::Size(34, 24);
 			this->toolStripStopLog->Text = L"Вимкнути логування";
 			this->toolStripStopLog->Click += gcnew System::EventHandler(this, &MainForm::toolStripLoggingStopLog_Click);
 			// 
@@ -201,8 +203,9 @@ namespace Coursework {
 			this->toolStripImportLog->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"toolStripImportLog.Image")));
 			this->toolStripImportLog->ImageTransparentColor = System::Drawing::Color::Magenta;
 			this->toolStripImportLog->Name = L"toolStripImportLog";
-			this->toolStripImportLog->Size = System::Drawing::Size(34, 33);
+			this->toolStripImportLog->Size = System::Drawing::Size(34, 24);
 			this->toolStripImportLog->Text = L"Імпортувати лог";
+			this->toolStripImportLog->Click += gcnew System::EventHandler(this, &MainForm::toolStripImportLog_Click);
 			// 
 			// toolStripExportLog
 			// 
@@ -210,8 +213,9 @@ namespace Coursework {
 			this->toolStripExportLog->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"toolStripExportLog.Image")));
 			this->toolStripExportLog->ImageTransparentColor = System::Drawing::Color::Magenta;
 			this->toolStripExportLog->Name = L"toolStripExportLog";
-			this->toolStripExportLog->Size = System::Drawing::Size(34, 33);
+			this->toolStripExportLog->Size = System::Drawing::Size(34, 24);
 			this->toolStripExportLog->Text = L"Експортувати лог";
+			this->toolStripExportLog->Click += gcnew System::EventHandler(this, &MainForm::toolStripExportLog_Click);
 			// 
 			// statusStrip1
 			// 
@@ -240,11 +244,11 @@ namespace Coursework {
 			this->tableLayoutPanel1->Controls->Add(this->keyLoggedArea, 1, 0);
 			this->tableLayoutPanel1->Controls->Add(this->tableLayoutPanel2, 0, 0);
 			this->tableLayoutPanel1->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->tableLayoutPanel1->Location = System::Drawing::Point(0, 74);
+			this->tableLayoutPanel1->Location = System::Drawing::Point(0, 62);
 			this->tableLayoutPanel1->Name = L"tableLayoutPanel1";
 			this->tableLayoutPanel1->RowCount = 1;
 			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 50)));
-			this->tableLayoutPanel1->Size = System::Drawing::Size(1051, 476);
+			this->tableLayoutPanel1->Size = System::Drawing::Size(1051, 488);
 			this->tableLayoutPanel1->TabIndex = 3;
 			// 
 			// keyLoggedArea
@@ -254,7 +258,7 @@ namespace Coursework {
 			this->keyLoggedArea->Margin = System::Windows::Forms::Padding(3, 3, 20, 10);
 			this->keyLoggedArea->Name = L"keyLoggedArea";
 			this->keyLoggedArea->ReadOnly = true;
-			this->keyLoggedArea->Size = System::Drawing::Size(780, 463);
+			this->keyLoggedArea->Size = System::Drawing::Size(780, 475);
 			this->keyLoggedArea->TabIndex = 0;
 			this->keyLoggedArea->Text = L"";
 			// 
@@ -270,13 +274,13 @@ namespace Coursework {
 			this->tableLayoutPanel2->RowCount = 2;
 			this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 45.22821F)));
 			this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 54.77179F)));
-			this->tableLayoutPanel2->Size = System::Drawing::Size(242, 470);
+			this->tableLayoutPanel2->Size = System::Drawing::Size(242, 482);
 			this->tableLayoutPanel2->TabIndex = 1;
 			// 
 			// monthCalendar1
 			// 
 			this->monthCalendar1->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->monthCalendar1->Location = System::Drawing::Point(9, 221);
+			this->monthCalendar1->Location = System::Drawing::Point(9, 226);
 			this->monthCalendar1->Name = L"monthCalendar1";
 			this->monthCalendar1->TabIndex = 0;
 			// 
@@ -342,6 +346,52 @@ namespace Coursework {
 	private: System::Void toolStripLoggingStopLog_Click(System::Object^ sender, System::EventArgs^ e) {
 		loggerSettings->setLoggerState(LOGGING_DISABLED);
 		initLoggingMode();
+	}
+	private: System::Void toolStripImportLog_Click(System::Object^ sender, System::EventArgs^ e) {
+		OpenFileDialog^ openFileDialog = gcnew OpenFileDialog;
+		openFileDialog->Filter = "TXT files (*.txt)|*.txt";
+		openFileDialog->FilterIndex = 2;
+		openFileDialog->RestoreDirectory = true;
+
+		if (openFileDialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
+		{
+			std::string filename = CastingUtils::castAsString(openFileDialog->FileName);
+			//TODO added loggic here
+			FileReader reader(filename);
+
+			std::string logs = reader.readLines();
+
+			this->keyLoggedArea->Text = CastingUtils::castAsString(logs);
+
+			System::Windows::Forms::DialogResult^ Show = System::Windows::Forms::MessageBox::Show(
+				"Імпорт логування пройшов успішно.",
+				"Імпорт",
+				System::Windows::Forms::MessageBoxButtons::OK,
+				System::Windows::Forms::MessageBoxIcon::Information
+			);
+		}
+	}
+	private: System::Void toolStripExportLog_Click(System::Object^ sender, System::EventArgs^ e) {
+		SaveFileDialog^ saveFileDialog = gcnew SaveFileDialog;
+
+		saveFileDialog->Filter = "TXT files (*.txt)|*.txt";
+		saveFileDialog->FilterIndex = 2;
+		saveFileDialog->RestoreDirectory = true;
+
+		if (saveFileDialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
+		{
+			std::string filename = CastingUtils::castAsString(saveFileDialog->FileName);
+			FileWriter writer(filename);
+
+			writer.write(CastingUtils::castAsString(this->keyLoggedArea->Text));
+
+			System::Windows::Forms::DialogResult^ Show = System::Windows::Forms::MessageBox::Show(
+				"Експорт логування пройшов успішно.",
+				"Експорт",
+				System::Windows::Forms::MessageBoxButtons::OK,
+				System::Windows::Forms::MessageBoxIcon::Information
+			);
+		}
 	}
 };
 }

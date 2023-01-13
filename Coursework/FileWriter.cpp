@@ -1,6 +1,6 @@
 #include "FileWriter.h"
 
-void FileWriter::logTail(std::string text)
+void FileWriter::write(std::string text)
 {
 	std::ofstream fout(filename, std::fstream::app);
 

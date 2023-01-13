@@ -8,6 +8,7 @@
 #include "KeyLoggerState.h"
 #include "KeyLoggedAreaHolder.h"
 #include "CastingUtils.h"
+#include "FileWriter.h"
 
 class KeyLogger
 {

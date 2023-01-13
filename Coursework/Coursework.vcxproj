@@ -122,6 +122,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CastingUtils.cpp" />
+    <ClCompile Include="FileReader.cpp" />
     <ClCompile Include="FileWriter.cpp" />
     <ClCompile Include="KeyLogConstants.cpp" />
     <ClCompile Include="KeyLoggedAreaHolder.cpp" />
@@ -133,6 +134,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CastingUtils.h" />
+    <ClInclude Include="FileReader.h" />
     <ClInclude Include="FileWriter.h" />
     <ClInclude Include="KeyLogConstants.h" />
     <ClInclude Include="KeyLoggedAreaHolder.h" />

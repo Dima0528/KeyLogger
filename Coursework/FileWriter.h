@@ -10,6 +10,6 @@ private:
 public:
 	FileWriter(std::string filename) : filename(filename) {}
 public:
-	void logTail(std::string text);
+	void write(std::string text);
 };
 
