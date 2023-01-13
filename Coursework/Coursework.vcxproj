@@ -121,6 +121,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AboutProgramWindow.cpp" />
     <ClCompile Include="CastingUtils.cpp" />
     <ClCompile Include="FileReader.cpp" />
     <ClCompile Include="FileWriter.cpp" />
@@ -133,6 +134,9 @@
     <ClCompile Include="MainForm.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AboutProgramWindow.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="CastingUtils.h" />
     <ClInclude Include="FileReader.h" />
     <ClInclude Include="FileWriter.h" />
@@ -147,6 +151,9 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="AboutProgramWindow.resx">
+      <DependentUpon>AboutProgramWindow.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.h</DependentUpon>
     </EmbeddedResource>

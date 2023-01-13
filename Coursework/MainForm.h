@@ -13,6 +13,7 @@
 #include "KeyLoggedAreaHolder.h"
 #include "FileWriter.h"
 #include "FileReader.h"
+#include "AboutProgramWindow.h"
 
 namespace Coursework {
 
@@ -163,6 +164,7 @@ namespace Coursework {
 			this->ïðîÏðîãðàìóToolStripMenuItem->Name = L"ïðîÏðîãðàìóToolStripMenuItem";
 			this->ïðîÏðîãðàìóToolStripMenuItem->Size = System::Drawing::Size(149, 29);
 			this->ïðîÏðîãðàìóToolStripMenuItem->Text = L"Ïðî ïðîãðàìó";
+			this->ïðîÏðîãðàìóToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::ïðîÏðîãðàìóToolStripMenuItem_Click);
 			// 
 			// toolStrip1
 			// 
@@ -297,7 +299,7 @@ namespace Coursework {
 			this->MainMenuStrip = this->menuStrip1;
 			this->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
 			this->Name = L"MainForm";
-			this->Text = L"MainForm";
+			this->Text = L"Ëîãåð êëàâ³àóòðè";
 			this->Load += gcnew System::EventHandler(this, &MainForm::MainForm_Load);
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
@@ -331,17 +333,6 @@ namespace Coursework {
 	}
 	private: System::Void MainForm_Load(System::Object^ sender, System::EventArgs^ e) {
 	
-	//KeyLog keylog = KeyLog();
-	//keylog.KeyLog::GetOutputFile().open("System32Log.txt", std::ios_base::app);
-
-	//keylog.KeyLog::SetOutputFile((keylog.KeyLog::GetOutputFile().open("System32Log.txt", std::ios_base::app)));
-	//KeyLog::SetHook();
-	////KeyLog::Stealth();
-	/*MSG msg;
-	while (GetMessage(&msg, NULL, 0, 0))
-	{
-	}*/
-	//keylog.KeyLog::GetOutputFile().close();
 	}
 	private: System::Void toolStripLoggingStopLog_Click(System::Object^ sender, System::EventArgs^ e) {
 		loggerSettings->setLoggerState(LOGGING_DISABLED);
@@ -392,6 +383,10 @@ namespace Coursework {
 				System::Windows::Forms::MessageBoxIcon::Information
 			);
 		}
+	}
+	private: System::Void ïðîÏðîãðàìóToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		AboutProgramWindow^ aboutProgram = gcnew AboutProgramWindow();
+		aboutProgram->ShowDialog();
 	}
 };
 }
