@@ -122,6 +122,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AboutProgramWindow.cpp" />
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="CastingUtils.cpp" />
     <ClCompile Include="FileReader.cpp" />
     <ClCompile Include="FileWriter.cpp" />
@@ -140,6 +141,7 @@
     <ClInclude Include="CastingUtils.h" />
     <ClInclude Include="FileReader.h" />
     <ClInclude Include="FileWriter.h" />
+    <ClInclude Include="Buttons.h" />
     <ClInclude Include="KeyLogConstants.h" />
     <ClInclude Include="KeyLoggedAreaHolder.h" />
     <ClInclude Include="KeyLogger.h" />
@@ -149,6 +151,9 @@
     <ClInclude Include="MainForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="StatusLabel.h" />
+    <ClInclude Include="StatusProgresBar.h" />
+    <ClInclude Include="WindowsNameComboBox.h" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="AboutProgramWindow.resx">
@@ -160,6 +165,9 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Images\right.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

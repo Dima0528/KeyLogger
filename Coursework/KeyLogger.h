@@ -7,6 +7,7 @@
 #include "KeyLoggerSettingsModel.h"
 #include "KeyLoggerState.h"
 #include "KeyLoggedAreaHolder.h"
+#include "Buttons.h"
 #include "CastingUtils.h"
 #include "FileWriter.h"
 
